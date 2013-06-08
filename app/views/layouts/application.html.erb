@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= content_for?(:title) ? yield(:title) : "Lissd" %></title>
+    <title>&bull; <%= content_for?(:title) ? yield(:title) : "Lissd" %></title>
     <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Lissd" %>">
     <%= stylesheet_link_tag "application", :media => "all" %>
     <%= javascript_include_tag "application" %>

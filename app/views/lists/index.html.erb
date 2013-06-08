@@ -1,0 +1,19 @@
+<h1>All The Lists</h1>
+<hr />
+
+<ol>
+
+<% @lists.each do |list| %>
+	<li>
+		<h2><%= link_to "#{list.title}", list_url(list) %></h2>
+		<p><%= list.description %> - <%= link_to "edit", edit_list_url(list) %> | <%= link_to "delete", list_url(list), :method => :delete %></p>
+	</li>
+<% end %>
+
+</ol>
+
+
+
+ <hr />
+
+ <%= link_to "add new list", new_list_path %>

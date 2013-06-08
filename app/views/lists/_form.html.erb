@@ -1,0 +1,17 @@
+<%= form_for @list do |form| %>
+	
+	<label>Title:
+		<p><%= form.text_field :title %> </p>
+	</label> 
+
+
+	<label>Description:
+		<p><%= form.text_area :description %> </p>
+	</label> 
+
+
+
+		<p><%= form.submit %> </p>
+
+
+<% end %>

@@ -1,0 +1,37 @@
+<h1><%= @list.title %></h1>
+<p> <%= @list.description %></p>
+
+<h3>To Do's</h3>
+
+<ul>
+	<% @list.items.incomplete.each do |item| %>
+		<% if item.id %>
+			<li><%= item.id %> . <%= item.title %> <%= button_to "done",  complete_item_path(@list.id, item.id), :class => "btn btn-mini" %></li>
+		<% end %>
+	<% end %>
+</ul>
+
+<section id="done">
+	<h3>Done</h3>
+
+	<ul>
+		<% @list.items.completed.each do |item| %>
+			<% if item.id %>
+				<li><%= item.id %> . <%= item.title %></li>
+			<% end %>
+		<% end %>
+	</ul>
+</section>
+
+<hr />
+
+<%= form_for( [@list, @item], :html => {:class => "form-horizontal"}) do |form| %>
+
+	<p>
+		<%= form.text_field :title %><%= form.submit "Add item" %>
+	</p>
+
+	
+<% end %>
+
+<%= link_to "back to all lists", lists_url %>
