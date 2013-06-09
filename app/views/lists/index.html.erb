@@ -18,7 +18,17 @@
 				<small><%= list.items.count %> items</small>
 			</span>
 		</h2>
-		<p class="well"><%= list.description %> <span class="pull-right"><%= link_to "edit", edit_list_url(list) %> | <%= link_to "delete", list_url(list), :method => :delete %></span></p>
+		
+		<p class="well"><%= list.description %> 
+			<% if list.user == current_user || list.user_id == nil %>
+			<span class="pull-right">
+					<%= link_to "edit", edit_list_url(list) %>
+					<% if user_signed_in? && list.user == current_user || user_signed_in? && current_user.has_role?(:admin) %>
+						 | <%= link_to "delete", list_url(list), :method => :delete %>
+					<% end %>
+				</span>
+			</p>
+		<% end %>
 	</li>
 <% end %>
 
