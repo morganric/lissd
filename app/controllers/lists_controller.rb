@@ -3,7 +3,7 @@ class ListsController < ApplicationController
 	respond_to :html, :xml, :js
 
 	def index
-		respond_with(@lists = List.all)
+		respond_with(@lists = List.order("created_at DESC").all)
 	end
 
 	def new 
@@ -12,6 +12,11 @@ class ListsController < ApplicationController
 
 	def create 
 		@list = List.new(params[:list])
+
+		if user_signed_in? 
+			@list.user_id = current_user.id
+		end	
+
 		if @list.save
 			flash[:notice] = "List created successfully"
 			respond_with(@list, :location => list_url(@list))

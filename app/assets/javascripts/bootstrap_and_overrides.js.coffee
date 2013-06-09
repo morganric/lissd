@@ -2,4 +2,4 @@ jQuery ->
   $("a[rel=popover]").popover()
   $(".tooltip").tooltip()
   $("a[rel=tooltip]").tooltip()
-  $(".alert").fadeOut(2000)
+  $(".alert").fadeOut(5000)

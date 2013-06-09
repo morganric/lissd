@@ -6,8 +6,13 @@ class ItemsController < ApplicationController
 	respond_to :html,:xml, :js
 
 	def create
-		@item = @list.items.create!(params[:item])
-		redirect_to list_url(@list), :notice => 'Item added'		
+		if @list.user = current_user || @list.user = nil
+			@item = @list.items.create!(params[:item])
+			redirect_to list_url(@list), :notice => 'Item added'
+		else
+			flash[:error] = "Only the owner of this list can add an item"
+			redirect_to list_url(@list)
+		end		
 	end
 
 

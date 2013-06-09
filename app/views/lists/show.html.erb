@@ -1,37 +1,49 @@
 <h1><%= @list.title %></h1>
-<p> <%= @list.description %></p>
+
+<% if @list.user_id != nil %>
+	<h3>by <%= link_to "#{@list.user.name}", user_url(@list.user_id) %></h3>
+<% end %>
+<p class="well"> <%= @list.description %></p>
 
 <h3>To Do's</h3>
 
-<ul>
+<ol>
 	<% @list.items.incomplete.each do |item| %>
 		<% if item.id %>
-			<li><%= item.id %> . <%= item.title %> <%= button_to "done",  complete_item_path(@list.id, item.id), :class => "btn btn-small btn-primary" %></li>
+			<li><%= item.title %>
+				<% if @list.user = current_user %>
+					<%= button_to "done",  complete_item_path(@list.id, item.id), :class => "btn btn-mini btn-primary pull-right" %>
+				<% end %>
+			</li>
 		<% end %>
 	<% end %>
-</ul>
+</ol>
 
 <section id="done">
 	<h3>Done</h3>
 
-	<ul>
+	<ol>
 		<% @list.items.completed.each do |item| %>
 			<% if item.id %>
-				<li><%= item.id %> . <%= item.title %></li>
+				<li><%= item.title %></li>
 			<% end %>
 		<% end %>
-	</ul>
+	</ol>
 </section>
 
 <hr />
 
-<%= form_for( [@list, @item], :html => {:class => "form-horizontal"}) do |form| %>
 
-	<p>
-		<%= form.text_field :title %><%= form.submit "Add item" %>
-	</p>
+<%= form_for( [@list, @item], :html => {:class => "form-inline"}) do |form| %>
+	<% if @list.user = current_user %>
+		<p>
+			<label class="checkbox">
+			<%= form.text_field :title, :class => "input" %>
+			<label>
+			<%= form.submit "+ Add item", :class => "btn btn-small btn-primary" %>
+		</p>
 
-	
+	<% end %>	
 <% end %>
 
 <%= link_to "back to all lists", lists_url %>

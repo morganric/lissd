@@ -11,14 +11,27 @@
   box-shadow: 0 1px 2px rgba(0,0,0,.15);
 }
 
-li {
-	list-style: none;
-	padding-left: none;
+#users-lists li {
+  
+  border-bottom: 1px solid lightgrey;
 }
-#done ul li {
+
+li {
+  list-style: none;
+	padding-left: none;
+  margin-left: none;
+}
+
+#done ol li {
 	text-decoration: line-through;
 	color: grey;
-	list-style: none;
+  padding-left: none !important;
+  margin-left: none !important;
+}
+
+footer {
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 // First set or import your overrides

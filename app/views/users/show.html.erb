@@ -1,3 +1,14 @@
-<h3>User</h3>
-<p>User: <%= @user.name %></p>
-<p>Email: <%= @user.email if @user.email %></p>
+
+<h1><%= @user.name %>'s Lists</h1>
+<hr />
+<ul id="users-lists">
+<% @user.lists.each do |list| %>
+	<li>
+		<h3>
+			<%= link_to "#{list.title}", list_path(list) %> 
+			<small class="pull-right"><%= list.items.count %> items</small>
+		</h3>
+	</li>
+<% end %>	
+
+</ul>
