@@ -6,7 +6,7 @@ class ItemsController < ApplicationController
 	respond_to :html,:xml, :js
 
 	def create
-		if @list.user = current_user || @list.user = nil
+		if @list.user == current_user || @list.user_id == nil
 			@item = @list.items.create!(params[:item])
 			redirect_to list_url(@list), :notice => 'Item added'
 		else

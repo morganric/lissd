@@ -33,9 +33,8 @@
 
 <hr />
 
-
 <%= form_for( [@list, @item], :html => {:class => "form-inline"}) do |form| %>
-	<% if @list.user = current_user %>
+	<% if @list.user == current_user || @list.user_id == nil %>
 		<p>
 			<label class="checkbox">
 			<%= form.text_field :title, :class => "input" %>
