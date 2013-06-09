@@ -10,7 +10,7 @@ match 'lists/:list_id/items/:id/complete' => 'items#complete', :as => :complete_
 match 'show/:id' => 'user#show'
 
   authenticated :user do
-    root :to => 'home#index'
+    root :to => 'lists#index'
   end
   root :to => "lists#index"
   devise_for :users

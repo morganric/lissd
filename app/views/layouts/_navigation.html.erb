@@ -1,4 +1,7 @@
 <%= link_to "Lissd", root_path, :class => 'brand' %>
+<ul class="nav">
+  <li><%= link_to "Create New List", new_list_path, :class => '' %></li>
+</ul>
 <ul class="nav pull-right">
   <% if user_signed_in? %>
     <li>
