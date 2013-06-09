@@ -6,7 +6,7 @@
 <ul>
 	<% @list.items.incomplete.each do |item| %>
 		<% if item.id %>
-			<li><%= item.id %> . <%= item.title %> <%= button_to "done",  complete_item_path(@list.id, item.id), :class => "btn btn-mini" %></li>
+			<li><%= item.id %> . <%= item.title %> <%= button_to "done",  complete_item_path(@list.id, item.id), :class => "btn btn-small btn-primary" %></li>
 		<% end %>
 	<% end %>
 </ul>
