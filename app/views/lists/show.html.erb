@@ -21,6 +21,11 @@
 						<i class="icon-th-list icon-white"></i>
 						<%= pluralize(@list.items.count, 'item') %>
 				</label>
+				<% if @list.published %>
+					<label class="label label-success">
+							<i class="icon-globe icon-white"></i> Public
+					</label>
+				<% end %>
 			</small>
 		</span>
 

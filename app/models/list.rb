@@ -1,5 +1,5 @@
 class List < ActiveRecord::Base
-  attr_accessible :description, :title, :publish
+  attr_accessible :description, :title, :published
 
   validates :title, :presence => true
 

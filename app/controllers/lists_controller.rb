@@ -15,7 +15,13 @@ class ListsController < ApplicationController
 		@list = List.find(params[:id])
 		@list.published = true
 		@list.save
-		redirect_to list_url(@list)
+		if @list.save
+			flash[:notice] = "List is now public"
+			redirect_to list_url(@list)
+		else
+			flash[:error] = "Could not publish list"
+			redirect_to new_list_url()
+		end
 	end
   
 
