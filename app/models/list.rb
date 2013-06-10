@@ -4,7 +4,7 @@ class List < ActiveRecord::Base
   validates :title, :presence => true
 
   scope :publish, where(:published => true)
-  scope :private, where(:published => true)
+  scope :private, where(:published => false)
 
   has_many :items
   belongs_to :user

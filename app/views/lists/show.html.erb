@@ -7,6 +7,8 @@
 	<span class="span1 pull-right">
 		<% if @list.published != true && @list.user == current_user %>
 			<%= button_to "publish",  publish_list_path(@list.id), :class => "btn btn-success" %>
+		<% elsif @list.published == true && @list.user == current_user %>
+				<%= button_to "un-publish",  publish_list_path(@list.id), :class => "btn btn-warning" %>
 		<% end %>
 	</span>
 

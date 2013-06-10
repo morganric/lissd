@@ -8,6 +8,8 @@ resources :lists do
 end
 
 match 'lists/:id/publish' => 'lists#publish', :as => :publish_list
+match 'lists/:id/private' => 'lists#private', :as => :private_item
+
 match 'lists/:list_id/items/:id/complete' => 'items#complete', :as => :complete_item
 match 'lists/:list_id/items/:id/incomplete' => 'items#incomplete', :as => :incomplete_item
 match 'lists/:list_id/items/:id/remove' => 'items#remove', :as => :remove_item

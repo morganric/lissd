@@ -20,10 +20,24 @@ class ListsController < ApplicationController
 			redirect_to list_url(@list)
 		else
 			flash[:error] = "Could not publish list"
-			redirect_to new_list_url()
+			redirect_to list_url(@list)
 		end
 	end
   
+	   def publish
+		@list = List.find(params[:id])
+		@list.published = false
+		@list.save
+		if @list.save
+			flash[:notice] = "List is now private"
+			redirect_to list_url(@list)
+		else
+			flash[:error] = "Could not privatise list"
+			redirect_to list_url(@list)
+		end
+	end
+ 
+
 
 	def create 
 		@list = List.new(params[:list])
