@@ -1,7 +1,13 @@
 <h1>
 	<%= @list.title %>
-	<span class="pull-right">
+
+	<span class="span2  pull-right">
 		<%= link_to "add new list", new_list_path, :class => "btn btn-primary"  %>
+	</span>
+	<span class="span1 pull-right">
+		<% if @list.published != true && @list.user == current_user %>
+			<%= button_to "publish",  publish_list_path(@list.id), :class => "btn btn-success" %>
+		<% end %>
 	</span>
 
 </h1>
@@ -11,10 +17,10 @@
 		by <%= link_to "#{@list.user.name}", user_url(@list.user_id) %>
 		<span class="pull-right">
 			<small>
-				<span class="label">
+				<label class="label">
 						<i class="icon-th-list icon-white"></i>
 						<%= pluralize(@list.items.count, 'item') %>
-				</span>
+				</label>
 			</small>
 		</span>
 
@@ -35,6 +41,7 @@
 								<span class="span1 pull-right">
 									<%= button_to "undo",  incomplete_item_path(@list.id, item.id), :class => "btn btn-mini btn-warning " %>
 								</span>
+								
 							<% end %>
 							<% if user_signed_in? && @list.user == current_user %>
 								<span class="span1 pull-right">

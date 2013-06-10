@@ -7,6 +7,7 @@ resources :lists do
   	  get 'page/:page', :action => :index, :on => :collection
 end
 
+match 'lists/:id/publish' => 'lists#publish', :as => :publish_list
 match 'lists/:list_id/items/:id/complete' => 'items#complete', :as => :complete_item
 match 'lists/:list_id/items/:id/incomplete' => 'items#incomplete', :as => :incomplete_item
 match 'lists/:list_id/items/:id/remove' => 'items#remove', :as => :remove_item

@@ -10,7 +10,7 @@
 
 <% @lists.each do |list| %>
 		<li class="row">
-		 <h2 span="span12">
+		 <h2 >
 			<%= link_to "#{list.title}", list_url(list) %> 
 			<small>
 				<% if list.user %> by <%= link_to "#{list.user.name}", user_url(list.user) %>

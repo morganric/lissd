@@ -1,11 +1,14 @@
 class List < ActiveRecord::Base
-  attr_accessible :description, :title
+  attr_accessible :description, :title, :publish
 
   validates :title, :presence => true
+
+  scope :publish, where(:published => true)
+  scope :private, where(:published => true)
 
   has_many :items
   belongs_to :user
 
   paginates_per 10
-  
+
 end

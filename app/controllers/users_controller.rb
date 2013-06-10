@@ -8,6 +8,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @user_lists = @user.lists.order("created_at DESC").page(params[:page]).per(10)
   end
   
   def update

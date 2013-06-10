@@ -11,5 +11,7 @@ class User < ActiveRecord::Base
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me
   
   has_many :lists
+
+  paginates_per 10
   
 end

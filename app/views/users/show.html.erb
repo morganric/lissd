@@ -1,25 +1,33 @@
 
 <h1><%= @user.name %>'s Lists</h1>
 <hr />
+
 <ul id="users-lists">
-<% @user.lists.each do |list| %>
-	<li>
-		<h3>
-			<%= link_to "#{list.title}", list_path(list) %> 
-			<small class="pull-right"><%= list.items.count %> items</small>
-			
-		</h3>
-		<p class="well"><%= list.description %>
-			<% if list.user == current_user || list.user_id == nil %>
-			<span class="pull-right">
-					<%= link_to "edit", edit_list_url(list) %>
-					<% if user_signed_in? && list.user == current_user || user_signed_in? && current_user.has_role?(:admin) %>
-						 | <%= link_to "delete", list_url(list), :method => :delete %>
-					<% end %>
-				</span>
-			<% end %>
-		</p>
-	</li>
+
+<% @user_lists.each do |list| %>
+	<%  if list.published || user_signed_in? && list.user == current_user %>
+		<li class="row">
+			<h2 >
+				<%= link_to "#{list.title}", list_path(list) %> 
+				<small class="pull-right">
+					<%= list.items.count %> items
+				</small>
+			</h2>
+			<p class="well">
+				<%= list.description %>
+				<% if list.user == current_user || list.user_id == nil %>
+					<span class="pull-right">
+						<%= link_to "edit", edit_list_url(list) %>
+						<% if user_signed_in? && list.user == current_user || user_signed_in? && current_user.has_role?(:admin) %>
+							 | <%= link_to "delete", list_url(list), :method => :delete %>
+						<% end %>
+					</span>
+				<% end %>
+			</p>
+		</li>
+	<% end %>
 <% end %>	
 
 </ul>
+
+<%= paginate @user_lists, :left => 1, :right => 3 %>

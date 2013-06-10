@@ -3,14 +3,21 @@ class ListsController < ApplicationController
 	respond_to :html, :xml, :js
 
 	def index
-
 		# @lists = List.order(:name).page params[:page]
-		respond_with(@lists = List.order("created_at DESC").page(params[:page]))
+		respond_with(@lists = List.where(:published => true).order("created_at DESC").page(params[:page]))
 	end
 
 	def new 
 		@list = List.new
 	end
+
+   def publish
+		@list = List.find(params[:id])
+		@list.published = true
+		@list.save
+		redirect_to list_url(@list)
+	end
+  
 
 	def create 
 		@list = List.new(params[:list])
@@ -29,9 +36,13 @@ class ListsController < ApplicationController
 	end
 
 	def show 
-		@list = List.find(params[:id])
-		@item = @list.items.new
-
+		if List.find(params[:id]).published || user_signed_in? && current_user ==  List.find(params[:id]).user
+			@list = List.find(params[:id])
+			@item = @list.items.new
+		else
+			flash[:error] = "Sorry this list is not public."
+			redirect_to root_url()
+		end
 	end
 
 	def edit
