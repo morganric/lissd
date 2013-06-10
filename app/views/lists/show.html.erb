@@ -9,9 +9,14 @@
 <% if @list.user_id != nil %>
 	<h3>
 		by <%= link_to "#{@list.user.name}", user_url(@list.user_id) %>
-	<span class="pull-right">
-		<small><%= @list.items.count %> items</small>
-	</span>
+		<span class="pull-right">
+			<small>
+				<span class="label">
+						<i class="icon-th-list icon-white"></i>
+						<%= pluralize(@list.items.count, 'item') %>
+				</span>
+			</small>
+		</span>
 
 	</h3>
 <% end %>
@@ -25,7 +30,7 @@
 			<% if item.completed %>
 				<h3 class="row">
 					<li class="done span12">	
-							<%= item.title %>
+							<%= link_to "#{item.title}", show_item_path(@list.id, item.id) %>
 							<% if user_signed_in? && @list.user == current_user || user_signed_in? && current_user.has_role?(:admin)  %>
 								<span class="span1 pull-right">
 									<%= button_to "undo",  incomplete_item_path(@list.id, item.id), :class => "btn btn-mini btn-warning " %>
@@ -41,7 +46,7 @@
 			<% else %>
 				<h3 class="row">
 					<li class="span12 ">
-						<%= item.title %>
+						<%= link_to "#{item.title}", show_item_path(@list.id, item.id) %>
 						<% if @list.user = current_user %>
 							<span class="span1 pull-right">
 								<%= button_to "done",  complete_item_path(@list.id, item.id), :class => "btn btn-mini btn-primary " %>

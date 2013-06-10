@@ -13,9 +13,17 @@
 		<li class="row">
 		 <h2 span="span12">
 			<%= link_to "#{list.title}", list_url(list) %> 
-			<small><% if list.user %> by <%= link_to "#{list.user.name}", user_url(list.user) %><% end %></small> 
+			<small>
+				<% if list.user %> by <%= link_to "#{list.user.name}", user_url(list.user) %>
+				<% else %>
+				<span class="label"><i class="icon-globe icon-white"></i></span>
+				<% end %>
+			</small> 
 			<span class="pull-right">
-				<small><%= list.items.count %> items</small>
+				<small><span class="label">
+					<i class="icon-th-list icon-white"></i>
+					<%= pluralize(list.items.count, 'item') %>
+				</span></small>
 			</span>
 		</h2>
 		

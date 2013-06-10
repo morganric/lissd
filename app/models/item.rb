@@ -5,5 +5,6 @@ class Item < ActiveRecord::Base
   scope :completed, where(:completed => true)
   scope :incomplete, where(:completed => false)
   scope :remove, where(:list_id != nil)
+  scope :show
 
 end
