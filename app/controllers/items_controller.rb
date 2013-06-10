@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
 
-	attr_accessor :complete, :remove
+	attr_accessor :complete, :remove, :incomplete
 	before_filter :find_list
 
 	respond_to :html,:xml, :js
@@ -23,11 +23,19 @@ class ItemsController < ApplicationController
 		redirect_to list_url(@list)
 	end
 
+	def incomplete
+		@item = @list.items.find(params[:id])
+		@item.completed = false
+		@item.save
+		redirect_to list_url(@list)
+	end
+
 	def remove
 		@item = @list.items.find(params[:id])
 		@item.list_id = nil
 		@item.save
 		redirect_to list_url(@list)
+		flash[:error] = "Item Removed."
 	end
 
 

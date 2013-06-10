@@ -10,8 +10,8 @@
 <ul id="all-lists">
 
 <% @lists.each do |list| %>
-		<li>
-		 <h2>
+		<li class="row">
+		 <h2 span="span12">
 			<%= link_to "#{list.title}", list_url(list) %> 
 			<small><% if list.user %> by <%= link_to "#{list.user.name}", user_url(list.user) %><% end %></small> 
 			<span class="pull-right">

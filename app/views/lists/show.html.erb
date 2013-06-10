@@ -10,7 +10,7 @@
 	<h3>
 		by <%= link_to "#{@list.user.name}", user_url(@list.user_id) %>
 	<span class="pull-right">
-		<%= @list.items.count %> items
+		<small><%= @list.items.count %> items</small>
 	</span>
 
 	</h3>
@@ -26,10 +26,14 @@
 				<h3 class="row">
 					<li class="done span12">	
 							<%= item.title %>
-							<% if @list.user = current_user || current_user.role = "admin" %>
+							<% if user_signed_in? && @list.user == current_user || user_signed_in? && current_user.has_role?(:admin)  %>
+							<span class="span1 pull-right">
+								<%= button_to "undo",  incomplete_item_path(@list.id, item.id), :class => "btn btn-mini btn-warning " %>
+							</span>
 							<span class="span1 pull-right">
 								<%= button_to "x remove", remove_item_path(@list.id, item.id), :class => "btn btn-mini btn-danger " %>
 							</span>
+							
 						<% end %>
 					</li>
 				</h3>

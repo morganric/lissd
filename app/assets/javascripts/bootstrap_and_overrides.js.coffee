@@ -3,7 +3,7 @@ jQuery ->
   $(".tooltip").tooltip()
   $("a[rel=tooltip]").tooltip()
   
-  $(".alert").fadeOut(5000)
+  $(".alert").fadeOut(3000)
 
   $("#myTab a").click (e) ->
   e.preventDefault()
