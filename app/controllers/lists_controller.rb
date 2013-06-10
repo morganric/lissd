@@ -3,7 +3,9 @@ class ListsController < ApplicationController
 	respond_to :html, :xml, :js
 
 	def index
-		respond_with(@lists = List.order("created_at DESC").all)
+
+		# @lists = List.order(:name).page params[:page]
+		respond_with(@lists = List.order("created_at DESC").page(params[:page]))
 	end
 
 	def new 
@@ -29,6 +31,7 @@ class ListsController < ApplicationController
 	def show 
 		@list = List.find(params[:id])
 		@item = @list.items.new
+
 	end
 
 	def edit

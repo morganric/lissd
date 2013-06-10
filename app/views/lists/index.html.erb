@@ -6,7 +6,6 @@
 </h1>
 <hr />
 
-
 <ul id="all-lists">
 
 <% @lists.each do |list| %>
@@ -41,4 +40,5 @@
 <% end %>
 
 </ul>
+<%= paginate @lists, :left => 1, :right => 3 %>
 

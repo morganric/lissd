@@ -4,6 +4,7 @@ Lissd::Application.routes.draw do
 
 resources :lists do
   	  resources :items
+  	  get 'page/:page', :action => :index, :on => :collection
 end
 
 match 'lists/:list_id/items/:id/complete' => 'items#complete', :as => :complete_item
