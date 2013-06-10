@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
 
-	attr_accessor :complete
+	attr_accessor :complete, :remove
 	before_filter :find_list
 
 	respond_to :html,:xml, :js
@@ -22,6 +22,14 @@ class ItemsController < ApplicationController
 		@item.save
 		redirect_to list_url(@list)
 	end
+
+	def remove
+		@item = @list.items.find(params[:id])
+		@item.list_id = nil
+		@item.save
+		redirect_to list_url(@list)
+	end
+
 
 	private 
 

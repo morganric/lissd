@@ -4,4 +4,6 @@ class Item < ActiveRecord::Base
   belongs_to :list
   scope :completed, where(:completed => true)
   scope :incomplete, where(:completed => false)
+  scope :remove, where(:list_id != nil)
+
 end

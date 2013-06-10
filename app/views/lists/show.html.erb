@@ -1,35 +1,58 @@
-<h1><%= @list.title %></h1>
+<h1>
+	<%= @list.title %>
+	<span class="pull-right">
+		<%= link_to "add new list", new_list_path, :class => "btn btn-primary"  %>
+	</span>
+
+</h1>
 
 <% if @list.user_id != nil %>
-	<h3>by <%= link_to "#{@list.user.name}", user_url(@list.user_id) %></h3>
+	<h3>
+		by <%= link_to "#{@list.user.name}", user_url(@list.user_id) %>
+	<span class="pull-right">
+		<%= @list.items.count %> items
+	</span>
+
+	</h3>
 <% end %>
 <p class="well"> <%= @list.description %></p>
 
-<h3>To Do's</h3>
 
-<ol>
-	<% @list.items.incomplete.each do |item| %>
+<ol id="list-items">
+	<% @list.items.each do |item| %>
 		<% if item.id %>
-			<li><%= item.title %>
-				<% if @list.user = current_user %>
-					<%= button_to "done",  complete_item_path(@list.id, item.id), :class => "btn btn-mini btn-primary pull-right" %>
-				<% end %>
-			</li>
+
+			<% if item.completed %>
+				<h3 class="row">
+					<li class="done span12">	
+							<%= item.title %>
+							<% if @list.user = current_user || current_user.role = "admin" %>
+							<span class="span1 pull-right">
+								<%= button_to "x remove", remove_item_path(@list.id, item.id), :class => "btn btn-mini btn-danger " %>
+							</span>
+						<% end %>
+					</li>
+				</h3>
+			<% else %>
+				<h3 class="row">
+					<li class="span12 ">
+						<%= item.title %>
+						<% if @list.user = current_user %>
+							<span class="span1 pull-right">
+								<%= button_to "done",  complete_item_path(@list.id, item.id), :class => "btn btn-mini btn-primary " %>
+							</span>
+							<span class="span1 pull-right">
+								<%= button_to "x remove", remove_item_path(@list.id, item.id), :class => "btn btn-mini btn-danger " %>
+							</span>
+						<% end %>
+					</li>
+				</h3>
+			<% end %>
+
 		<% end %>
 	<% end %>
+
 </ol>
-
-<section id="done">
-	<h3>Done</h3>
-
-	<ol>
-		<% @list.items.completed.each do |item| %>
-			<% if item.id %>
-				<li><%= item.title %></li>
-			<% end %>
-		<% end %>
-	</ol>
-</section>
 
 <hr />
 

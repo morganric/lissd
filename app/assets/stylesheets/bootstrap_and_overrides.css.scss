@@ -2,3 +2,8 @@
 body { padding-top: 60px; }
 @import "bootstrap-responsive";
 
+
+#done ol, #todo {
+  padding-left: none !important;
+  margin-left: none !important;
+}
