@@ -5,7 +5,7 @@
 <ul id="users-lists">
 
 <% @user_lists.each do |list| %>
-	<%  if list.published || user_signed_in? && list.user == current_user %>
+	<%  if list.published || user_signed_in? && list.user == current_user || user_signed_in? && current_user.role == "admin" %>
 		<li class="row">
 			<h2 >
 				<%= link_to "#{list.title}", list_path(list) %> 
