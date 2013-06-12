@@ -56,7 +56,7 @@ class ListsController < ApplicationController
 	end
 
 	def show 
-		if List.find(params[:id]).published || user_signed_in? && current_user ==  List.find(params[:id]).user
+		if List.find(params[:id]).published || user_signed_in? && current_user ==  List.find(params[:id]).user || user_signed_in? && current_user.has_role?(:admin)
 			@list = List.find(params[:id])
 			@item = @list.items.new
 		else
