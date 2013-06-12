@@ -1,0 +1,15 @@
+<%= form_for list_item_path(@list, @item) do |f| %>
+	
+	<label>Title:
+		<p><%= f.text_field :title, :value => @item.title, :name => "item[title]", :validate => { :presence => true }  %> </p>
+	</label> 
+
+
+	<label>Description:
+		<p><%= f.text_area :description, :rows => 5, :cols => 10, :name => "item[description]" %> </p>
+	</label> 
+
+		<p><%= f.submit :value => "save", :class => "btn btn-large btn-primary" %> </p>
+
+
+<% end %>

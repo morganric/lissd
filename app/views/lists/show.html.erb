@@ -1,10 +1,8 @@
-<h1>
+<h1 class="clearfix">
 	<%= @list.title %>
 
-	<span class="span2  pull-right">
-		<%= link_to "add new list", new_list_path, :class => "btn btn-primary"  %>
-	</span>
-	<span class="span1 pull-right">
+
+	<span class="pull-right">
 		<% if @list.published != true && @list.user == current_user %>
 			<%= button_to "publish",  publish_list_path(@list.id), :class => "btn btn-success" %>
 		<% elsif @list.published == true && @list.user == current_user %>
@@ -30,37 +28,18 @@
 				<% end %>
 			</small>
 		</span>
-
 	</h3>
 <% end %>
 <p class="well"> <%= @list.description %></p>
 
 
-<ol id="list-items">
+<ol class="list-items">
 	<% @list.items.each do |item| %>
 		<% if item.id %>
-
-			<% if item.completed %>
-				<h3 class="row">
-					<li class="done span12">	
-							<%= link_to "#{item.title}", show_item_path(@list.id, item.id) %>
-							<% if user_signed_in? && @list.user == current_user || user_signed_in? && current_user.has_role?(:admin)  %>
-								<span class="span1 pull-right">
-									<%= button_to "undo",  incomplete_item_path(@list.id, item.id), :class => "btn btn-mini btn-warning " %>
-								</span>
-								
-							<% end %>
-							<% if user_signed_in? && @list.user == current_user %>
-								<span class="span1 pull-right">
-									<%= button_to "x remove", remove_item_path(@list.id, item.id), :class => "btn btn-mini btn-danger " %>
-								</span>
-							<% end %>
-					</li>
-				</h3>
-			<% else %>
-				<h3 class="row">
-					<li class="span12 ">
-						<%= link_to "#{item.title}", show_item_path(@list.id, item.id) %>
+			<% if item.completed == false %>
+			<h3 class="row">
+					<li class="span12 todo">
+						<%= auto_link("#{item.title}") %>
 						<% if @list.user = current_user %>
 							<span class="span1 pull-right">
 								<%= button_to "done",  complete_item_path(@list.id, item.id), :class => "btn btn-mini btn-primary " %>
@@ -75,16 +54,45 @@
 
 		<% end %>
 	<% end %>
-
 </ol>
+
+
+<ul class="list-items">
+	<% @list.items.each do |item| %>
+		<% if item.id %>
+			<% if item.completed == true %>
+				<h3 class="row">
+					<li class="done span12">	
+							<%= item.title %>
+							<% if user_signed_in? && @list.user == current_user || user_signed_in? && current_user.has_role?(:admin)  %>
+								<span class="span1 pull-right">
+									<%= button_to "undo",  incomplete_item_path(@list.id, item.id), :class => "btn btn-mini btn-warning " %>
+								</span>
+								
+							<% end %>
+							<% if user_signed_in? && @list.user == current_user %>
+								<span class="span1 pull-right">
+									<%= button_to "x remove", remove_item_path(@list.id, item.id), :class => "btn btn-mini btn-danger " %>
+								</span>
+							<% end %>
+					</li>
+				</h3>
+				<% end %>
+		<% end %>
+	<% end %>	
+
+
+</ul>
+
+
 
 <hr />
 
-<%= form_for( [@list, @item], :html => {:class => "form-inline"}) do |form| %>
+<%= form_for([@list, @item], :html => {:class => "form-inline"}) do |form| %>
 	<% if @list.user == current_user || @list.user_id == nil %>
 		<p>
 			<label class="checkbox">
-			<%= form.text_field :title, :class => "input" %>
+				<%= form.text_field :title, :class => "input" %>
 			<label>
 			<%= form.submit "+ Add item", :class => "btn btn-small btn-primary" %>
 		</p>
@@ -93,3 +101,6 @@
 <% end %>
 
 <%= link_to "back to all lists", lists_url %>
+<span class=" pull-right">
+	<%= link_to "add new list", new_list_path, :class => "btn btb-large btn-primary"  %>
+</span>

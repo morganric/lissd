@@ -5,6 +5,4 @@ jQuery ->
   
   $(".alert").fadeOut(3000)
 
-  $("#myTab a").click (e) ->
-  e.preventDefault()
-  $(this).tab "show"
+

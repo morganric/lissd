@@ -1,8 +1,6 @@
 class List < ActiveRecord::Base
   attr_accessible :description, :title, :published
 
-  validates :title, :presence => true
-
   scope :publish, where(:published => true)
   scope :private, where(:published => false)
 
