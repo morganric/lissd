@@ -2,7 +2,7 @@
 	<%= @list.title %>
 
 
-	<span class="pull-right">
+	<span class="pull-right" id="publish-buttons">
 		<% if @list.published != true && @list.user == current_user %>
 			<%= button_to "publish",  publish_list_path(@list.id), :class => "btn btn-success" %>
 		<% elsif @list.published == true && @list.user == current_user %>
@@ -15,17 +15,28 @@
 <% if @list.user_id != nil %>
 	<h3>
 		by <%= link_to "#{@list.user.name}", user_url(@list.user_id) %>
-		<span class="pull-right">
+		<span class="pull-right" id="meta-data">
 			<small>
-				<label class="label">
-						<i class="icon-th-list icon-white"></i>
-						<%= pluralize(@list.items.count, 'item') %>
-				</label>
 				<% if @list.published %>
 					<label class="label label-success">
 							<i class="icon-globe icon-white"></i> Public
 					</label>
+					|
 				<% end %>
+				<label class="label">
+						<i class="icon-th-list icon-white"></i>
+						<%= pluralize(@list.items.count, 'item') %>
+				</label>
+				<label class="label label-warning">
+						<i class="icon-flag icon-white"></i>
+						<%= @list.items.count - @list.items.completed.count %>
+				</label>
+				<label class="label label-success">
+						<i class="icon-ok icon-white"></i>
+						<%= @list.items.completed.count %>
+				</label>
+				
+				
 			</small>
 		</span>
 	</h3>
@@ -38,21 +49,21 @@
 		<% if item.id %>
 			<% if item.completed == false %>
 			<h3 class="row">
-					<li class="span12 todo">
+					<li class="todo span11 ">
 						<%= auto_link("#{item.title}") %>
+						
 						<% if @list.user = current_user %>
-
+							<span class="pull-right span1">
+								<%= button_to "x remove", remove_item_path(@list.id, item.id), :class => "btn btn-mini btn-danger " %>
+							</span>
 							<span class="pull-right span1">
 								<%= link_to "edit", edit_list_item_url(@list.id, item.id), :class => "btn btn-mini" %>
 							</span>
-							
 							<span class="span1 pull-right">
-								<%= button_to "x remove", remove_item_path(@list.id, item.id), :class => "btn btn-mini btn-danger " %>
+								<%= link_to raw("<i class='icon-ok icon-white'></i>  done"),  complete_item_path(@list.id, item.id), :class => "btn btn-mini btn-success " %>
 							</span>
 
-							<span class="span1 pull-right">
-								<%= button_to "done",  complete_item_path(@list.id, item.id), :class => "btn btn-mini btn-primary " %>
-							</span>
+							<p class=""> <small><%= item.description %></small> </p>
 
 						<% end %>
 					</li>
@@ -69,24 +80,30 @@
 		<% if item.id %>
 			<% if item.completed == true %>
 				<h3 class="row">
-					<li class="done span12">	
+					<li class="done span11">	
 							<%= item.title %>
+							
 							<% if user_signed_in? && @list.user == current_user || user_signed_in? && current_user.has_role?(:admin)  %>
-								
-								<span class="pull-right span1">
-											<%= link_to "edit", edit_list_item_url(@list.id, item.id), :class => "btn btn-mini" %>
-								</span>
-								
-								
-							<% end %>
-							<% if user_signed_in? && @list.user == current_user %>
 								<span class="span1 pull-right">
 									<%= button_to "x remove", remove_item_path(@list.id, item.id), :class => "btn btn-mini btn-danger " %>
 								</span>
+
+								<span class="pull-right span1">
+											<%= button_to "edit", edit_list_item_url(@list.id, item.id), :class => "btn btn-mini" %>
+								</span>
+
+							<% end %>
+							<% if user_signed_in? && @list.user == current_user  %>
+
+								
 								<span class="span1 pull-right">
 									<%= button_to "undo",  incomplete_item_path(@list.id, item.id), :class => "btn btn-mini btn-warning " %>
 								</span>
+
+							
 							<% end %>
+							<p class=""> <small><%= item.description %></small> </p>
+
 					</li>
 				</h3>
 				<% end %>

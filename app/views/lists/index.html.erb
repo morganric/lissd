@@ -28,10 +28,12 @@
 		
 		<p class="well"><%= list.description %> 
 			<% if list.user == current_user || list.user_id == nil %>
-			<span class="pull-right">
-					<%= link_to "edit", edit_list_url(list) %>
+			<span class="span1 pull-right">
+					<%= link_to "edit", edit_list_url(list), :class => "btn btn-mini btn-warning" %>
+			</span>	
+			<span class="span1 pull-right">	
 					<% if user_signed_in? && list.user == current_user || user_signed_in? && current_user.has_role?(:admin) %>
-						 | <%= link_to "delete", list_url(list), :method => :delete %>
+						 <%= link_to "x delete", list_url(list), :method => :delete, :class => "btn btn-mini btn-danger" %>
 					<% end %>
 				</span>
 			<% end %>

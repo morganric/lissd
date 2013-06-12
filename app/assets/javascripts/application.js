@@ -18,8 +18,8 @@
 
 $( document ).ready(function() {
 
-	$('span.span1, span.pull-right').hide();
-	$('#all-lists li p, .list-items li').mouseover(function() {$(this).children().toggle()});
-	$('#all-lists li p, .list-items li').mouseout(function() {$(this).children().toggle()});
+	$('ul span.span1, ol span.span1').hide();
+	$('#all-lists li p, .list-items li').mouseover(function() {$(this).children('span').toggle()});
+	$('#all-lists li p, .list-items li').mouseout(function() {$(this).children('span').toggle()});
 
 	});
