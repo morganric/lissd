@@ -15,6 +15,9 @@ ul#all-lists li, ul#users-lists li, .done {
     list-style: none;
 }
 
+ul.list-items li, ol.list-items li {
+  height: 50px;
+}
 
 ul.list-items  li.done {
 	text-decoration: line-through;

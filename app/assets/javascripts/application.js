@@ -15,3 +15,11 @@
 //= require bootstrap
 //= require rails.validations
 //= require_tree .
+
+$( document ).ready(function() {
+
+	$('span.span1, span.pull-right').hide();
+	$('#all-lists li p, .list-items li').mouseover(function() {$(this).children().toggle()});
+	$('#all-lists li p, .list-items li').mouseout(function() {$(this).children().toggle()});
+
+	});
