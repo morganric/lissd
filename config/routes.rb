@@ -18,6 +18,7 @@ get 'lists/:list_id/items/:item_id/edit' => 'items#edit', :as => :edit_item
 post 'lists/:list_id/items/:item_id/edit' => 'items#update', :as => :edit_update
 match 'lists/:list_id/items/:id/' => 'items#show', :as => :show_item
 
+# match 'users/:id' => 'users#show'
 
   authenticated :user do
     root :to => 'lists#index'
