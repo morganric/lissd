@@ -6,7 +6,7 @@
 
 
 	<label>Description:
-		<p><%= f.text_area :description, :rows => 5, :cols => 10, :name => "item[description]" %> </p>
+		<p><%= f.text_area :description, :value => @item.description, :rows => 5, :cols => 10, :name => "item[description]" %> </p>
 	</label> 
 
 		<p><%= f.submit :value => "save", :class => "btn btn-large btn-primary" %> </p>

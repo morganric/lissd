@@ -15,7 +15,7 @@ match 'lists/:list_id/items/:id/incomplete' => 'items#incomplete', :as => :incom
 match 'lists/:list_id/items/:id/remove' => 'items#remove', :as => :remove_item
 
 get 'lists/:list_id/items/:item_id/edit' => 'items#edit', :as => :edit_item
-post 'lists/:list_id/items/:item_id/edit' => 'items#update', :as => :edit_update
+post 'lists/:list_id/items/:item_id/edit' => 'items#update', :as => :update_item
 match 'lists/:list_id/items/:id/' => 'items#show', :as => :show_item
 
 # match 'users/:id' => 'users#show'

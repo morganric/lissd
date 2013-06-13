@@ -52,7 +52,7 @@ class ItemsController < ApplicationController
 		@item = Item.find(params[:item_id])
 		if @item.update_attributes(params[:item])
 			flash[:notice] = "Item updated"
-			respond_with(@list, @item)
+			redirect_to list_path(@list)
 		else
 			flash[:error] = "Could not update item"
 			redirect_to edit_list_item_path(@list.id, @item.id)
