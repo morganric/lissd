@@ -9,9 +9,28 @@
 		<li class="row">
 			<h2 >
 				<%= link_to "#{list.title}", list_path(list) %> 
-				<small class="pull-right">
-					<%= list.items.count %> items
-				</small>
+				<span class="pull-right" id="meta-data">
+					<small class="pull-right">
+						<% if list.published %>
+						<label class="label label-success">
+								<i class="icon-globe icon-white"></i> Public
+						</label>
+						|
+					<% end %>
+					<label class="label">
+							<i class="icon-th-list icon-white"></i>
+							<%= pluralize(list.items.count, 'item') %>
+					</label>
+					<label class="label label-warning">
+							<i class="icon-flag icon-white"></i>
+							<%= list.items.count - list.items.completed.count %>
+					</label>
+					<label class="label label-success">
+							<i class="icon-ok icon-white"></i>
+							<%= list.items.completed.count %>
+					</label>
+					</small>
+				</span>
 			</h2>
 			<p class="well">
 				<%= list.description %>
