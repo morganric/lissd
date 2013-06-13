@@ -19,31 +19,28 @@
 <% if @list.user_id != nil %>
 	<h3>
 		by <%= link_to "#{@list.user.name}", user_url(@list.user_id) %>
-		<span class="pull-right" id="meta-data">
-			<small>
-				<% if @list.published %>
-					<label class="label label-success">
-							<i class="icon-globe icon-white"></i> Public
+		
+	</h3>
+	<span id="meta-data" class="clearfix" >
+		<span class="pull-right" id="meta-data">	
+					
+					<label class="label">
+							<i class="icon-th-list icon-white"></i>
+							<%= pluralize(@list.items.count, 'item') %>
 					</label>
-					|
-				<% end %>
-				<label class="label">
-						<i class="icon-th-list icon-white"></i>
-						<%= pluralize(@list.items.count, 'item') %>
-				</label>
-				<label class="label label-warning">
-						<i class="icon-flag icon-white"></i>
-						<%= @list.items.count - @list.items.completed.count %>
-				</label>
-				<label class="label label-success">
-						<i class="icon-ok icon-white"></i>
-						<%= @list.items.completed.count %>
-				</label>
-				
+					<label class="label label-warning">
+							<i class="icon-flag icon-white"></i>
+							<%= @list.items.count - @list.items.completed.count %>
+					</label>
+					<label class="label label-success">
+							<i class="icon-ok icon-white"></i>
+							<%= @list.items.completed.count %>
+					</label>
+					
 				
 			</small>
 		</span>
-	</h3>
+	</span>
 <% end %>
 <p class="well"> <%= @list.description %></p>
 
@@ -113,13 +110,19 @@
 				<% end %>
 		<% end %>
 	<% end %>	
-
-
 </ul>
 
+<span class="pull-right" id="meta-data">
+				<small>
 
+					<% if @list.published %>
+						<label class="label label-success">
+								<i class="icon-globe icon-white"></i> Public
+						</label>
+					<% end %>
 
-<hr />
+					<%= raw @list.tags.map(&:name).map { |t| link_to raw("<i class='icon-tag icon-white'></i> #{t}"),  tag_path(t), :class => "label" }.join('  ') %>
+		</span>
 
 <%= form_for([@list, @item], :html => {:class => "form-inline"}) do |form| %>
 	<% if @list.user == current_user || @list.user_id == nil %>

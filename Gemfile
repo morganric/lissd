@@ -44,3 +44,4 @@ gem "hub", ">= 1.10.2", :require => nil, :group => [:development]
 gem 'kaminari'
 gem 'client_side_validations'
 gem 'rails_autolink'
+gem 'acts-as-taggable-on'

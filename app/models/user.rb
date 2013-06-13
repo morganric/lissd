@@ -13,5 +13,7 @@ class User < ActiveRecord::Base
   has_many :lists
 
   paginates_per 10
+
+  acts_as_tagger
   
 end

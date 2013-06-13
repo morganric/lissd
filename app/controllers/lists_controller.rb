@@ -4,7 +4,13 @@ class ListsController < ApplicationController
 
 	def index
 		# @lists = List.order(:name).page params[:page]
-		respond_with(@lists = List.where(:published => true).order("created_at DESC").page(params[:page]))
+		# respond_with(@lists = List.where(:published => true).order("created_at DESC").page(params[:page]))
+
+		 if params[:tag]
+		    @lists = List.where(:published => true).order("created_at DESC").tagged_with(params[:tag]).page(params[:page])
+		  else
+		    respond_with(@lists = List.where(:published => true).order("created_at DESC").page(params[:page]))
+		  end
 	end
 
 	def new 

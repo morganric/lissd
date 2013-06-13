@@ -20,6 +20,8 @@ match 'lists/:list_id/items/:id/' => 'items#show', :as => :show_item
 
 # match 'users/:id' => 'users#show'
 
+get 'tags/:tag', to: 'lists#index', as: :tag
+
   authenticated :user do
     root :to => 'lists#index'
   end

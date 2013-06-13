@@ -1,17 +1,22 @@
-<%= form_for @list do |form| %>
+<%= form_for @list do |f| %>
 	
 	<label>Title:
-		<p><%= form.text_field :title %> </p>
+		<p><%= f.text_field :title %> </p>
 	</label> 
 
 
 	<label>Description:
-		<p><%= form.text_area :description, :rows => 5, :cols => 10 %> </p>
+		<p><%= f.text_area :description, :rows => 5, :cols => 10 %> </p>
 	</label> 
 
 
+	  <%= f.label :tag_list, "Tags (separated by commas)" %>
+	  <br />
+	  <%= f.text_field :tag_list %>
 
-		<p><%= form.submit :class => "btn btn-large btn-primary"%> </p>
+
+
+		<p><%= f.submit :class => "btn btn-large btn-primary"%> </p>
 
 
 <% end %>

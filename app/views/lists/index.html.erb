@@ -6,6 +6,10 @@
 </h1>
 <hr />
 
+<div id="tag_cloud">
+  
+</div>
+
 <ul id="all-lists">
 
 <% @lists.each do |list| %>
@@ -26,7 +30,9 @@
 			</span>
 		</h2>
 		
-		<p class="well"><%= list.description %> 
+		<p class="well">
+			<%= list.description %> 
+			
 			<% if list.user == current_user || list.user_id == nil %>
 			<span class="span1 pull-right">
 					<%= link_to "edit", edit_list_url(list), :class => "btn btn-mini btn-warning" %>
@@ -38,6 +44,9 @@
 				</span>
 			<% end %>
 		</p>
+		<span class="pull-left">
+				<%= raw list.tags.map(&:name).map { |t| link_to raw("<i class='icon-tag icon-white'></i> #{t}"),  tag_path(t), :class => "label" }.join('  ') %>
+			</span>
 		</li>
 <% end %>
 
