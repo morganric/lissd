@@ -19,7 +19,7 @@
 $( document ).ready(function() {
 
 	$('ul span.span1, ol span.span1').hide();
-	$('#all-lists li p, .list-items li').mouseover(function() {$(this).children('span').toggle()});
-	$('#all-lists li p, .list-items li').mouseout(function() {$(this).children('span').toggle()});
+	$('#all-lists li p, .list-items li').mouseover(function() {$(this).children('.span1').toggle()});
+	$('#all-lists li p, .list-items li').mouseout(function() {$(this).children('.span1').toggle()});
 
 	});

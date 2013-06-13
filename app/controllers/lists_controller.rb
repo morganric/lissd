@@ -24,7 +24,7 @@ class ListsController < ApplicationController
 		end
 	end
   
-	   def publish
+   def private
 		@list = List.find(params[:id])
 		@list.published = false
 		@list.save

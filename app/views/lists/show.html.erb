@@ -1,14 +1,18 @@
 <h1 class="clearfix">
 	<%= @list.title %>
+		<span class="pull-right span1">
+				<% if @list.user == current_user %>
+					<%= link_to "edit",  edit_list_path(@list.id), :class => "btn" %>
+				<% end %>
+			</span>
+		<span class="pull-right span1">
+			<% if @list.published != true && @list.user == current_user %>
+				<%= button_to "publish",  publish_list_path(@list.id), :class => "btn btn-success" %>
+			<% elsif @list.published == true && @list.user == current_user %>
+					<%= button_to "un-publish",  private_list_path(@list.id), :class => "btn btn-warning" %>
+			<% end %>
+		</span>
 
-
-	<span class="pull-right" id="publish-buttons">
-		<% if @list.published != true && @list.user == current_user %>
-			<%= button_to "publish",  publish_list_path(@list.id), :class => "btn btn-success" %>
-		<% elsif @list.published == true && @list.user == current_user %>
-				<%= button_to "un-publish",  publish_list_path(@list.id), :class => "btn btn-warning" %>
-		<% end %>
-	</span>
 
 </h1>
 
